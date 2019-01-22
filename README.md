@@ -38,8 +38,6 @@
 
 
 - **Then you have to set the basic parameters like this** 
-<br><br>
-**$current\_url**= http://phpsdk.openpaytestandtrain.com.au;
 -----------------------------------------------------------------------------
  <br>                          
 <h3>                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;User Parameters from site</h3>
@@ -50,13 +48,13 @@
 
 <pre style="background-color: #d3f1f3; color: black;">      $PurchasePrice = 170.00;                                           //Format : 100.00(Not more than $1 million)
       
-      $JamCallbackURL = $current_url."/openpay-au-sdk/callback.php";     //Not more than 250 characters
+      $JamCallbackURL = CALLBACK_URL;     //Not more than 250 characters
       
-      $JamCancelURL = $current_url."/openpay-au-sdk/cancel.php";         //Not more than 250 characters
+      $JamCancelURL = CANCEL_URL;         //Not more than 250 characters
       
-      $JamFailURL = $current_url."/openpay-au-sdk/failure.php";          //Not more than 250 characters
-      
-      $form_url = https://retailer.myopenpay.com.au/WebSalesTraining/;
+      $JamFailURL =FAILURE_URL;          //Not more than 250 characters
+	        
+      $form_url =   FORM_URL;
       
       $JamRetailerOrderNo = '10000478';                                 //Consumer site order number
       
