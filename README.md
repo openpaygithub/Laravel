@@ -33,7 +33,7 @@
         define("CANCEL_URL",url('/cancel'));                                          //Openpay Cancel URL place here
         define("FAILURE_URL",url('/failure'));                                        //Openpay Failure URL place here
         define("FORM_URL","https://retailer.myopenpay.com.au/WebSalesTraining/");     //Openpay Form Submit URL place here
-        define("JAMTOKEN","30000000000000889|155f5b95-a40a-4ae5-8273-41ae83fec8c9");  //Openpay Test Mode or Live Mode JAMTOKEN place here.(* When it is generate just change the JAMTOKEN) 
+        define("JAMTOKEN","Put your jamtoken here");  //Openpay Test Mode or Live Mode JAMTOKEN place here.(* When it is generate just change the JAMTOKEN) 
 </pre>
 
 
