@@ -30,7 +30,7 @@ namespace openpayau\openpaylaravel\lib\Openpay\Common;
 
 		define("FORM_URL","https://retailer.myopenpay.com.au/WebSalesTraining/"); //Openpay Form Submit URL place here
 
-		define("JAMTOKEN","Put your Jam token here");//Openpay Test Mode or Live Mode JAMTOKEN place here
+		define("JAMTOKEN","30000000000000889|155f5b95-a40a-4ae5-8273-41ae83fec8c9");//Openpay Test Mode or Live Mode JAMTOKEN place here
 
 		$token = explode('|',JAMTOKEN);
 
@@ -56,4 +56,6 @@ namespace openpayau\openpaylaravel\lib\Openpay\Common;
 		require(dirname(dirname(__FILE__)) . '/Api/PlanPurchasePriceReductionCall.php');//refund 
 
 		require(dirname(dirname(__FILE__)) . '/Api/OnlineOrderDispatchPlan.php');//Plan Dispatch Call 
+		
+		require(dirname(dirname(__FILE__)) . '/Api/OnlineOrderFraudAlert.php');//Customer Fraud Alert Call
 

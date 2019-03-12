@@ -295,3 +295,35 @@ Something to write to txt log:
 
 Save string to log, use FILE_APPEND to append:
 <pre style="background-color: #d3f1f3; color: black;">    file_put_contents(app_path('/../vendor/openpayau/openpaylaravel/lib/Openpay').'/Log/log'.date("j.n.Y").'.log', $log, FILE_APPEND);</pre>
+
+
+
+
+- **For Online Order Fraud Alert Process**
+
+
+<pre style="background-color: #d3f1f3; color: black;">        $PlanID = '3000000020110';          //Plan ID retrieved from Web Call 1 API
+        $Method = "OnlineOrderFraudAlert";
+        $Details = $req->input('fdetails'); //fraud text
+        
+
+
+<pre style="background-color: #d3f1f3; color: black;">       $obj = new \openpayau\openpaylaravel\lib\Openpay\Api\OnlineOrderFraudAlert(URL, $Method, '', JAMTOKEN, AUTHTOKEN, $PlanID, '', '' , '',$Details);
+       $response = $obj->_OnlineOrderFraudAlert(); 
+        $output = json_decode($response,true);    [dd($output);]
+        $openErrorStatus=new\openpayau\openpaylaravel\lib\Openpay\Exception\ErrorHandler();</pre>
+        
+
+
+Something to write to txt log:
+<pre style="background-color: #d3f1f3; color: black;">         $log  = "Order fraud log time: ".$_SERVER['REMOTE_ADDR'].' - '.date("F j, Y, g:i a").PHP_EOL.
+         "Log: ".$response.PHP_EOL.
+         "-------------------------".PHP_EOL;</pre>
+
+
+Save string to log, use FILE_APPEND to append:
+<pre style="background-color: #d3f1f3; color: black;">        file_put_contents(app_path('/../vendor/openpayau/openpaylaravel/lib/Openpay').'/Log/log'.date("j.n.Y").'.log', $log, FILE_APPEND);</pre>
+        .
+
+<br>
+This API call is provided for those systems that support latent customer fraud warning alerts that may be received outside of the normal process.
