@@ -46,7 +46,31 @@
 
 
 
-<pre style="background-color: #d3f1f3; color: black;">      $PurchasePrice = 170.00;                                           //Format : 100.00(Not more than $1 million)
+<pre style="background-color: #d3f1f3; color: black;">   
+
+        if (!Session::has('cart')) 
+        {
+            return redirect()->route('product.shoppingcart');
+        }
+        
+        $oldCart = Session::get('cart');
+        
+        $cart = new Cart($oldCart);
+       
+        try 
+        {
+              $chars = "0123456789";
+              $res = "";
+                 for ($i = 0; $i < 4; $i++) 
+                 {
+                   $res .= $chars[mt_rand(0, strlen($chars)-1)];
+                 }
+
+      $url=URL;
+
+      $jamtoken=JAMTOKEN; 
+
+      $PurchasePrice = 170.00;             //Format : 100.00(Not more than $1 million)
       
       $JamCallbackURL = CALLBACK_URL;     //Not more than 250 characters
       
@@ -56,37 +80,70 @@
 	        
       $form_url =   FORM_URL;
       
-      $JamRetailerOrderNo = '10000478';                                 //Consumer site order number
+      $JamRetailerOrderNo = '10000478';         //Consumer site order number
       
-      $JamEmail = 'gautamtest@gmail.com';                               //Not more than 150 characters
+      $JamEmail = 'gautamtest@gmail.com';       //Not more than 150 characters
       
-      $JamFirstName = 'Test';                                           //First name(Not more than 50 characters)
+      $JamFirstName = 'Test';                   //First name(Not more than 50 characters)
       
-      $JamOtherNames = 'Devloper';                                      //Middle name(Not more than 50 characters)
+      $JamOtherNames = 'Devloper';              //Middle name(Not more than 50 characters)
       
-      $JamFamilyName = 'Test';                                          //Last name(Not more than 50 characters)
+      $JamFamilyName = 'Test';                  //Last name(Not more than 50 characters)
       
-      $JamDateOfBirth = '04 Nov 1982';                                  //dd mmm yyyy
+      $JamDateOfBirth = '04 Nov 1982';          //dd mmm yyyy
       
-      $JamAddress1 = '15/520 Collins Street';                           //Not more than 100 characters
+      $JamAddress1 = '15/520 Collins Street';   //Not more than 100 characters
       
-      $JamAddress2 = '';                                                //Not more than 100 characters
+      $JamAddress2 = '';                        //Not more than 100 characters
       
-      $JamSubrub = 'Melbourne';                                         //Not more than 100 characters
+      $JamSubrub = 'Melbourne';                 //Not more than 100 characters
       
-      $JamState = 'VIC';                                                //Not more than 3 characters
+      $JamState = 'VIC';                        //Not more than 3 characters
       
-      $JamPostCode = '3000';                                            //Not more than 4 characters
+      $JamPostCode = '3000';                    //Not more than 4 characters
       
-      $JamDeliveryDate = '01 Jan 2019';                                 //dd mmm yyyy
-</pre>
+      $JamDeliveryDate = '01 Jan 2019';         //dd mmm yyyy
 
+      $JamGender = 'M';                         //M/F
+
+      $JamPhoneNumber = '9830000000';
+
+      $ChargeBackCount = 0;                     //How many chargebacks are known to have been received from this customer?-1 = Unknown
+
+      $CustomerQuality = 1;
+</pre>
+<br>
+<pre>
+$PostValues = array(
+                  'RetailerOrderNo'=>$JamRetailerOrderNo,
+                  'ChargeBackCount'=>$ChargeBackCount,
+                  'CustomerQuality'=>$CustomerQuality,
+                  'FirstName'=>$JamFirstName,
+                  'OtherNames'=>$JamOtherNames,
+                  'FamilyName'=>$JamFamilyName,
+                  'Email'=>$JamEmail,
+                  'DateOfBirth'=>$JamDateOfBirth,
+                  'Gender'=>$JamGender,
+                  'PhoneNumber'=>$JamPhoneNumber,
+                  'ResAddress1'=>$JamAddress1,
+                  'ResAddress2'=>$JamAddress2,
+                  'ResSuburb'=>$JamSubrub,
+                  'ResState'=>$JamState,
+                  'ResPostCode'=>$JamPostCode,
+                  'DelAddress1'=>$JamAddress1,
+                  'DelAddress2'=>$JamAddress2,
+                  'DelSuburb'=>$JamSubrub,
+                  'DelState'=>$JamState,
+                  'DelPostCode'=>$JamPostCode
+                  );  
+</pre>
 <br>
 
 - **Now you have to call the Call-1 NEW ONLINE ORDER API menthods like this**
 
-<pre style="background-color: #d3f1f3; color: black;">        $Method = "NewOnlineOrder";
-        $obj = new \openpayau\openpaylaravel\lib\Openpay\Api\NewOnlineOrder(URL,$Method,$PurchasePrice,JAMTOKEN, AUTHTOKEN,'','','','','');
+<pre style="background-color: #d3f1f3; color: black;">        
+  $Method = "NewOnlineOrder";
+        $obj = new \openpayau\openpaylaravel\lib\Openpay\Api\NewOnlineOrder(URL,$Method,$PurchasePrice,JAMTOKEN, AUTHTOKEN,'','','','','','',$PostValues);
         $responsecall1 = $obj->_checkorder();
         $output = json_decode($responsecall1,true);
         $openErrorStatus = new \openpayau\openpaylaravel\lib\OpenPay\Exception\ErrorHandler();
@@ -114,27 +171,51 @@
 - **Now we got plan id and ready for payment so here it is by Call-2 API**
 
 
-<pre style="background-color: #d3f1f3; color: black;">     if($output)
-     {
-         $JamPlanID = $output['PlanID'];   [Plan ID retrieved from Web Call 1 API]
-         $pagegurl = $form_url.'?JamCallbackURL='.$JamCallbackURL.'&JamCancelURL='.$JamCancelURL.'&JamFailURL='.$JamFailURL.'&JamAuthToken='.urlencode(JAMTOKEN).'&JamPlanID='.urlencode( (string) $JamPlanID).'&JamRetailerOrderNo='.urlencode( $JamRetailerOrderNo ).'&JamPrice='.urlencode($PurchasePrice).'&JamEmail='.urlencode($JamEmail).'&JamFirstName='.urlencode($JamFirstName).'&JamOtherNames='.urlencode($JamOtherNames).'&JamFamilyName='.urlencode($JamFamilyName).'&JamDateOfBirth='.urlencode($JamDateOfBirth).'&JamAddress1='.urlencode($JamAddress1).'&JamAddress2='.urlencode($JamAddress2).'&JamSubrub='.urlencode($JamSubrub).'&JamState='.urlencode($JamState).'&JamPostCode='.urlencode($JamPostCode).'&JamDeliveryDate='.urlencode($JamDeliveryDate);
-         try 
-         {
-               if($JamDateOfBirth)
-                \openpayau\openpaylaravel\lib\OpenPay\Validation\Validation::_validateDate($JamDateOfBirth);     
-               if($JamDateOfBirth)
-               \openpayau\openpaylaravel\lib\OpenPay\Validation\Validation::_validateDate($JamDeliveryDate);
-               if($JamState)
-               \openpayau\openpaylaravel\lib\OpenPay\Validation\Validation::_validateState($JamState);
-               if($JamPostCode)
-               \openpayau\openpaylaravel\lib\OpenPay\Validation\Validation::_validatePostcode($JamPostCode);       
-               $charge = \openpayau\openpaylaravel\lib\OpenPay\Api\OpenpayCharge::_charge($pagegurl);
-         }
-         catch(Exception $e) 
-         {
-             echo 'Message: ' .$e->getMessage();
-         }
-    }
+<pre style="background-color: #d3f1f3; color: black;">     
+  
+    if($output)
+            {
+              if($output['status'] == 0){
+
+                $userdetails = Auth::user();
+                $order = new Order;
+                    $order->user_id = $userdetails->id;
+                    $order->payment_id = 0;
+                    $order->address = $request->input('address');
+                    $order->name = $request->input('name');
+                    $order->email = $request->input('email');
+                    $order->final_amount = $PurchasePrice;
+                    $order->plan_id = $output['PlanID'];
+
+                    $order->save();
+                    
+                  $JamPlanID = $output['PlanID'];             //Plan ID retrieved from Web Call 1 API
+                  $pagegurl = $form_url.'?JamCallbackURL='.$JamCallbackURL.'&JamCancelURL='.$JamCancelURL.'&JamFailURL='.$JamFailURL.'&JamAuthToken='.urlencode(JAMTOKEN).'&JamPlanID='.urlencode( (string) $JamPlanID);
+                  
+                  
+                  try {
+                    if($JamDateOfBirth)
+                      \openpayau\openpaylaravel\lib\OpenPay\Validation\Validation::_validateDate($JamDateOfBirth);   
+                    if($JamDateOfBirth)
+                      \openpayau\openpaylaravel\lib\OpenPay\Validation\Validation::_validateDate($JamDeliveryDate);
+                    if($JamState)
+                      \openpayau\openpaylaravel\lib\OpenPay\Validation\Validation::_validateState($JamState);
+                    if($JamPostCode)
+                      \openpayau\openpaylaravel\lib\OpenPay\Validation\Validation::_validatePostcode($JamPostCode);     
+                    $charge = \openpayau\openpaylaravel\lib\OpenPay\Api\OpenpayCharge::_charge($pagegurl);
+                  }
+                  catch(Exception $e) {
+                    echo 'Message: ' .$e->getMessage();
+                  }
+                }else{
+                  return redirect()->route('checkout')->with('error',$output['reason']);
+
+                }
+            }
+
+        } catch (\Exception $e) {
+            return redirect()->route('checkout')->with('error', $e->getMessage());
+        }
 </pre>
 <br>
 
