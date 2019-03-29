@@ -22,13 +22,13 @@ namespace openpayau\openpaylaravel\lib\Openpay\Common;
 /****AUS****/
 //define("URL","https://retailer.myopenpay.com.au/ServiceTraining/JAMServiceImpl.svc/"); // Change the url as per Test or Live Environment
 //define("FORM_URL","https://retailer.myopenpay.com.au/WebSalesTraining/"); // Change the url as per Test or Live Environment
-//define("JAMTOKEN","30000000000000889|155f5b95-a40a-4ae5-8273-41ae83fec8c9"); // Change the jamtoken as per Test or Live Environment
+//define("JAMTOKEN","token aus"); // Change the jamtoken as per Test or Live Environment
 /****AUS****/
 
 /****UK****/
 define("URL","https://integration.training.myopenpay.co.uk/JamServiceImpl.svc/"); // Change the url as per Test or Live Environment
 define("FORM_URL","https://websales.training.myopenpay.co.uk/"); // Change the url as per Test or Live Environment
-define("JAMTOKEN","add your token" // Change the jamtoken as per Test or Live Environment
+define("JAMTOKEN","add your token uk" // Change the jamtoken as per Test or Live Environment
 /****UK****/
 
 define("CALLBACK_URL",url('/callback'));//Openpay Callback URL place here
