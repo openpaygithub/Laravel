@@ -219,7 +219,7 @@ $PostValues = array(
 </pre>
 <br>
 
--  **After the process is complete, the Jam system will redirect to the URL supplied along with a response value for the transaction**
+-  **After the payment  process complited on openpay, it will redirect to the merchant website with help of callback url**
 
 <h5>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Success Url :</h5>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[JamCallbackURL]?status=SUCCESS&planid=3000000022284&orderid=1402
@@ -263,7 +263,8 @@ $PostValues = array(
 
 - **Add the Call-3 PAYMENT CAPTURE API like below**
  
-<pre style="background-color: #d3f1f3; color: black;">        $PlanID = '3000000019868';
+<pre style="background-color: #d3f1f3; color: black;">       
+		$PlanID = '3000000019868'; // callback url get  
         $Method = "OnlineOrderCapturePayment";
         $obj=new\openpayau\openpaylaravel\lib\OpenPay\Api\OnlineOrderCapturePayment(URL,$Method,'',JAMTOKEN,AUTHTOKEN,$PlanID);
         $response = $obj->_checkorder(); 
