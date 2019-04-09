@@ -70,7 +70,7 @@
 
       $jamtoken=JAMTOKEN; 
 
-      $PurchasePrice = 170.00;             //Format : 100.00(Not more than $1 million)
+      $PurchasePrice = 170.00;             //Format : 100.00(Not more than $1 million) , This values are comming form checkout form
       
       $JamCallbackURL = CALLBACK_URL;     //Not more than 250 characters
       
@@ -80,33 +80,33 @@
 	        
       $form_url =   FORM_URL;
       
-      $JamRetailerOrderNo = '10000478';         //Consumer site order number
+      $JamRetailerOrderNo = '10000478';         //Consumer site order number, This values are comming form checkout form
       
-      $JamEmail = 'gautamtest@gmail.com';       //Not more than 150 characters
+      $JamEmail = 'gautamtest@gmail.com';       //Not more than 150 characters, This values are comming form checkout form
       
-      $JamFirstName = 'Test';                   //First name(Not more than 50 characters)
+      $JamFirstName = 'Test';                   //First name(Not more than 50 characters), This values are comming form checkout form
       
-      $JamOtherNames = 'Devloper';              //Middle name(Not more than 50 characters)
+      $JamOtherNames = 'Devloper';              //Middle name(Not more than 50 characters), This values are comming form checkout form
       
-      $JamFamilyName = 'Test';                  //Last name(Not more than 50 characters)
+      $JamFamilyName = 'Test';                  //Last name(Not more than 50 characters), This values are comming form checkout form
       
-      $JamDateOfBirth = '04 Nov 1982';          //dd mmm yyyy
+      $JamDateOfBirth = '04 Nov 1982';          //dd mmm yyyy, This values are comming form checkout form
       
-      $JamAddress1 = '15/520 Collins Street';   //Not more than 100 characters
+      $JamAddress1 = '15/520 Collins Street';   //Not more than 100 characters, This values are comming form checkout form
       
-      $JamAddress2 = '';                        //Not more than 100 characters
+      $JamAddress2 = '';                        //Not more than 100 characters, This values are comming form checkout form
       
-      $JamSubrub = 'Melbourne';                 //Not more than 100 characters
+      $JamSubrub = 'Melbourne';                 //Not more than 100 characters, This values are comming form checkout form
       
-      $JamState = 'VIC';                        //Not more than 3 characters
+      $JamState = 'VIC';                        //Not more than 3 characters, This values are comming form checkout form
       
-      $JamPostCode = '3000';                    //Not more than 4 characters
+      $JamPostCode = '3000';                    //Not more than 4 characters, This values are comming form checkout form
       
-      $JamDeliveryDate = '01 Jan 2019';         //dd mmm yyyy
+      $JamDeliveryDate = '01 Jan 2019';         //dd mmm yyyy, This values are comming form checkout form
 
-      $JamGender = 'M';                         //M/F
+      $JamGender = 'M';                         //M/F, This values are comming form checkout form
 
-      $JamPhoneNumber = '9830000000';
+      $JamPhoneNumber = '9830000000';          //, This values are comming form checkout form
 
       $ChargeBackCount = 0;                     //How many chargebacks are known to have been received from this customer?-1 = Unknown
 
